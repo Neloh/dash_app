@@ -8,7 +8,7 @@ Flask-Cors==3.0.4
 future==0.16.0
 numpy==1.14.3
 pandas==0.23.0
-Pillow==5.1.0
+pillow>=6.2.0
 plotly==3.10.0
 python-dateutil==2.7.3
 PyWavelets==0.5.2
