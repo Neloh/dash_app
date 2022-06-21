@@ -6,7 +6,7 @@ Flask==1.0.2
 Flask-Compress==1.4.0
 Flask-Cors>=3.0.9
 future==0.16.0
-numpy==1.14.3
+numpy==1.22.0
 pandas==0.23.0
 pillow>=6.2.0
 plotly==3.10.0
