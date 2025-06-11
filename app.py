@@ -2,10 +2,16 @@ from dash import Dash, html, dcc, callback, Input, Output
 from flask import Flask
 
 server = Flask(__name__)
-app = Dash(__name__, server=server)
+app = Dash(
+    __name__,
+    server=server,
+    external_stylesheets=[
+        'https://codepen.io/amyoshino/pen/jzXypZ.css'
+    ]
+)
 
 # For Bootstrap CSS
-app.css.append_css({'external_url': 'https://codepen.io/amyoshino/pen/jzXypZ.css'})
+#app.css.append_css({'external_url': 'https://codepen.io/amyoshino/pen/jzXypZ.css'})
 
 app.layout = html.Div(
     html.Div([
