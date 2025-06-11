@@ -148,4 +148,4 @@ def update_image_src(selector):
     return figure
 
 if __name__ == '__main__':
-    app.run_server(host='127.0.0.1', port=int("5000"),debug=True)
+    app.run_server(host='127.0.0.1', port=int("8050"),debug=False)
