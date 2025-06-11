@@ -145,4 +145,4 @@ def update_graph_2(selector):
     return figure
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run_server(host='0.0.0.0', port=8050, debug=False)
