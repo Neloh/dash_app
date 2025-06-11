@@ -1,14 +1,11 @@
-## Introducing callbacks
+from dash import Dash, html, dcc, callback, Input, Output
+from flask import Flask
 
-# -*- coding: utf-8 -*-
-import dash
-import dash_core_components as dcc
-import dash_html_components as html
+server = Flask(__name__)
+app = Dash(__name__, server=server)
 
-app = dash.Dash()
-
-# Boostrap CSS.
-app.css.append_css({'external_url': 'https://codepen.io/amyoshino/pen/jzXypZ.css'})  # noqa: E501
+# For Bootstrap CSS
+app.css.append_css({'external_url': 'https://codepen.io/amyoshino/pen/jzXypZ.css'})
 
 app.layout = html.Div(
     html.Div([
@@ -41,13 +38,13 @@ app.layout = html.Div(
                     [
                         html.P('Choose City:'),
                         dcc.Checklist(
-                                id = 'Cities',
+                                id='Cities',
                                 options=[
                                     {'label': 'San Francisco', 'value': 'SF'},
                                     {'label': 'Montreal', 'value': 'MT'}
                                 ],
                                 value=['SF', 'MT'],
-                                labelStyle={'display': 'inline-block'}
+                                inline=True  # replaces labelStyle
                         ),
                     ],
                     className='six columns',
@@ -62,7 +59,7 @@ app.layout = html.Div(
                 dcc.Graph(
                     id='example-graph'
                 )
-                ], className= 'six columns'
+                ], className='six columns'
                 ),
 
                 html.Div([
@@ -78,17 +75,17 @@ app.layout = html.Div(
                         }
                     }
                 )
-                ], className= 'six columns'
+                ], className='six columns'
                 )
             ], className="row"
         )
     ], className='ten columns offset-by-one')
 )
 
-@app.callback(
-    dash.dependencies.Output('example-graph', 'figure'),
-    [dash.dependencies.Input('Cities', 'value')])
-def update_image_src(selector):
+@callback(
+    Output('example-graph', 'figure'),
+    [Input('Cities', 'value')])
+def update_graph_1(selector):
     data = []
     if 'SF' in selector:
         data.append({'x': [1, 2, 3], 'y': [4, 1, 2], 'type': 'bar', 'name': 'SF'})
@@ -98,14 +95,14 @@ def update_image_src(selector):
         'data': data,
         'layout': {
             'title': 'Graph 1',
-            'xaxis' : dict(
+            'xaxis': dict(
                 title='x Axis',
                 titlefont=dict(
                 family='Courier New, monospace',
                 size=20,
                 color='#7f7f7f'
             )),
-            'yaxis' : dict(
+            'yaxis': dict(
                 title='y Axis',
                 titlefont=dict(
                 family='Helvetica, monospace',
@@ -116,10 +113,10 @@ def update_image_src(selector):
     }
     return figure
 
-@app.callback(
-    dash.dependencies.Output('example-graph-2', 'figure'),
-    [dash.dependencies.Input('Cities', 'value')])
-def update_image_src(selector):
+@callback(
+    Output('example-graph-2', 'figure'),
+    [Input('Cities', 'value')])
+def update_graph_2(selector):
     data = []
     if 'SF' in selector:
         data.append({'x': [1, 2, 3], 'y': [4, 1, 2], 'type': 'line', 'name': 'SF'})
@@ -129,14 +126,14 @@ def update_image_src(selector):
         'data': data,
         'layout': {
             'title': 'Graph 2',
-            'xaxis' : dict(
+            'xaxis': dict(
                 title='x Axis',
                 titlefont=dict(
                 family='Courier New, monospace',
                 size=20,
                 color='#7f7f7f'
             )),
-            'yaxis' : dict(
+            'yaxis': dict(
                 title='y Axis',
                 titlefont=dict(
                 family='Helvetica, monospace',
@@ -148,4 +145,4 @@ def update_image_src(selector):
     return figure
 
 if __name__ == '__main__':
-    app.run_server(host='127.0.0.1', port=int("8050"),debug=False)
+    app.run(debug=False)
