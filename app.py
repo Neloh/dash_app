@@ -8,7 +8,7 @@ app = Dash(
     external_stylesheets=[
         'https://codepen.io/amyoshino/pen/jzXypZ.css'
     ],
-    routes_pathname_prefix='/'
+    routes_pathname_prefix='/proxy/8050/'
 )
 
 # For Bootstrap CSS
