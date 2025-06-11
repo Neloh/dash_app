@@ -14,7 +14,13 @@ app = Dash(
 
 # For Bootstrap CSS
 #app.css.append_css({'external_url': 'https://codepen.io/amyoshino/pen/jzXypZ.css'})
-
+@server.after_request
+def add_cors_headers(response):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+    return response
+    
 app.layout = html.Div(
     html.Div([
         html.Div(
